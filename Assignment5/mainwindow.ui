@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowTitle">
+   <string>Grid + Polygon + Transformations</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,2">
+    <item>
+     <widget class="QFrame" name="canvasContainer">
+      <layout class="QVBoxLayout" name="verticalLayout_left">
+       <item>
+        <!-- drawing surface -->
+        <widget class="my_label" name="frame">
+         <property name="minimumSize">
+          <size><width>600</width><height>500</height></size>
+         </property>
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <property name="frameShadow"><enum>QFrame::Sunken</enum></property>
+         <property name="text"><string/></property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="bottomInfo">
+         <item><widget class="QLabel" name="lblHover"><property name="text"><string>Hover: X: 0, Y: 0</string></property></widget></item>
+         <item><widget class="QLabel" name="lblInfo"><property name="text"><string>Click to add vertices. Close polygon to freeze 'original'.</string></property></widget></item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <item>
+     <widget class="QFrame" name="controls">
+      <layout class="QVBoxLayout" name="verticalLayout_right">
+
+       <!-- Grid -->
+       <item>
+        <widget class="QGroupBox" name="groupGrid">
+         <property name="title"><string>Grid / View</string></property>
+         <layout class="QGridLayout" name="gridLayoutGrid">
+          <item row="0" column="0"><widget class="QPushButton" name="btnDrawGrid"><property name="text"><string>Draw Grid</string></property></widget></item>
+          <item row="0" column="1"><widget class="QPushButton" name="btnClear"><property name="text"><string>Clear</string></property></widget></item>
+          <item row="1" column="0"><widget class="QLabel" name="labelGrid"><property name="text"><string>Cell size</string></property></widget></item>
+          <item row="1" column="1"><widget class="QSpinBox" name="spinGridSize"><property name="minimum"><number>5</number></property><property name="maximum"><number>60</number></property><property name="value"><number>20</number></property></widget></item>
+          <item row="2" column="0" colspan="2"><widget class="QPushButton" name="btnClosePolygon"><property name="text"><string>Close Polygon</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Original controls -->
+       <item>
+        <widget class="QGroupBox" name="groupOriginal">
+         <property name="title"><string>Original</string></property>
+         <layout class="QHBoxLayout" name="layoutOriginal">
+          <item><widget class="QPushButton" name="btnRevertOriginal"><property name="text"><string>Revert to Original</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Translation -->
+       <item>
+        <widget class="QGroupBox" name="groupTranslate">
+         <property name="title"><string>Translate</string></property>
+         <layout class="QGridLayout">
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>Tx</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinTx"><property name="decimals"><number>2</number></property><property name="minimum"><double>-1000.0</double></property><property name="maximum"><double>1000.0</double></property></widget></item>
+          <item row="1" column="0"><widget class="QLabel"><property name="text"><string>Ty</string></property></widget></item>
+          <item row="1" column="1"><widget class="QDoubleSpinBox" name="spinTy"><property name="decimals"><number>2</number></property><property name="minimum"><double>-1000.0</double></property><property name="maximum"><double>1000.0</double></property></widget></item>
+          <item row="2" column="0" colspan="2"><widget class="QPushButton" name="btnTranslate"><property name="text"><string>Apply Translation</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Rotation -->
+       <item>
+        <widget class="QGroupBox" name="groupRotate">
+         <property name="title"><string>Rotate</string></property>
+         <layout class="QGridLayout">
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>θ (deg)</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinAngle"><property name="minimum"><double>-360.0</double></property><property name="maximum"><double>360.0</double></property><property name="singleStep"><double>1.0</double></property></widget></item>
+          <item row="1" column="0" colspan="2"><widget class="QPushButton" name="btnRotate"><property name="text"><string>Rotate about Origin</string></property></widget></item>
+          <item row="2" column="0" colspan="2"><widget class="QPushButton" name="btnRotateAboutPoint"><property name="text"><string>Rotate about Last Click</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Scale -->
+       <item>
+        <widget class="QGroupBox" name="groupScale">
+         <property name="title"><string>Scale</string></property>
+         <layout class="QGridLayout">
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>Sx</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinSx"><property name="value"><double>1.0</double></property><property name="minimum"><double>-20.0</double></property><property name="maximum"><double>20.0</double></property></widget></item>
+          <item row="1" column="0"><widget class="QLabel"><property name="text"><string>Sy</string></property></widget></item>
+          <item row="1" column="1"><widget class="QDoubleSpinBox" name="spinSy"><property name="value"><double>1.0</double></property><property name="minimum"><double>-20.0</double></property><property name="maximum"><double>20.0</double></property></widget></item>
+          <item row="2" column="0" colspan="2"><widget class="QPushButton" name="btnScale"><property name="text"><string>Apply Scale</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Shear -->
+       <item>
+        <widget class="QGroupBox" name="groupShear">
+         <property name="title"><string>Shear</string></property>
+         <layout class="QGridLayout">
+          <item row="0" column="0"><widget class="QLabel"><property name="text"><string>shx</string></property></widget></item>
+          <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinShx"><property name="minimum"><double>-10.0</double></property><property name="maximum"><double>10.0</double></property></widget></item>
+          <item row="1" column="0"><widget class="QLabel"><property name="text"><string>shy</string></property></widget></item>
+          <item row="1" column="1"><widget class="QDoubleSpinBox" name="spinShy"><property name="minimum"><double>-10.0</double></property><property name="maximum"><double>10.0</double></property></widget></item>
+          <item row="2" column="0" colspan="2"><widget class="QPushButton" name="btnShear"><property name="text"><string>Apply Shear</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Reflect -->
+       <item>
+        <widget class="QGroupBox" name="groupReflect">
+         <property name="title"><string>Reflect</string></property>
+         <layout class="QGridLayout">
+          <item row="0" column="0"><widget class="QPushButton" name="btnReflectX"><property name="text"><string>Across X-axis</string></property></widget></item>
+          <item row="0" column="1"><widget class="QPushButton" name="btnReflectY"><property name="text"><string>Across Y-axis</string></property></widget></item>
+          <item row="1" column="0"><widget class="QPushButton" name="btnDrawLine"><property name="text"><string>Draw Line (last 2 picks)</string></property></widget></item>
+          <item row="1" column="1"><widget class="QPushButton" name="btnReflectDrawnLine"><property name="text"><string>Reflect about Drawn Line</string></property></widget></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item><spacer name="spacer" ><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+      </layout>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
