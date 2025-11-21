@@ -19,4 +19,4 @@ Jadavpur University
 
 Individual all assignments of Arko Dasgupta given [here](https://github.com/arkodasgupta0412/Computer-Graphics)
 
-Individual all assignments of Arjeesh Palai given [here](https://gihub.com/shadowbeast0/Graphics-Lab)
+Individual all assignments of Arjeesh Palai given [here](https://github.com/shadowbeast0/Graphics-Lab)
